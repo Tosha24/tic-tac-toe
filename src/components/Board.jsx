@@ -65,6 +65,7 @@ const Board = () => {
   const handleUndo = () => {
     if(currentMove === 0 || winner) return;
     setCurrentMove(currentMove - 1);
+    setCurrentPlayer(currentPlayer === "X" ? "0" : "X")
     setBoard(moveHistory[currentMove - 1]);
   }
 
