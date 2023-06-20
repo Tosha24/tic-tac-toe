@@ -3,7 +3,7 @@ import Title from "./components/Title";
 
 function App() {
   return (
-    <div>
+    <div className='overflow-x-hidden overflow-y-hidden'>
       <Title/>
       <Game/>
     </div>

@@ -126,11 +126,11 @@ const Board = () => {
         </div>
       </div>
       {/* Undo and Redo */}
-      <div className="flex flex-row text-5xl my-4 gap-72">
-        <div className="border-2 border-cyan-600 rounded-full p-4 hover:bg-fuchsia-200">
+      <div className="flex flex-row text-3xl gap-28 md:text-5xl my-4 md:gap-72">
+        <div className="border-2 border-cyan-600 rounded-full p-4 hover:bg-fuchsia-200 hover:-translate-y-1 duration-300">
           <FcUndo data-tooltip-id="tooltip-1" data-tooltip-content="Undo" onClick={handleUndo} disabled={currentMove === 0}/>
         </div>
-        <div className="border-2 border-cyan-600 rounded-full p-4 hover:bg-fuchsia-200">
+        <div className="border-2 border-cyan-600 rounded-full p-4 hover:bg-fuchsia-200 hover:-translate-y-1 duration-100">
           <FcRedo data-tooltip-id="tooltip-2" data-tooltip-content="Redo" onClick={handleRedo} disabled={currentMove === moveHistory.length - 1}/>
         </div>
       </div>
