@@ -5,7 +5,7 @@ import { Tooltip } from "react-tooltip";
 
 const Board = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
-  const [currentPlayer, setCurrentPlayer] = useState("O");
+  const [currentPlayer, setCurrentPlayer] = useState("X");
   const [winner, setWinner] = useState(null);
   const [moveHistory, setMoveHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
@@ -23,6 +23,8 @@ const Board = () => {
     newMoveHistory.push(newBoard);
     setMoveHistory(newMoveHistory);
     setCurrentMove(currentMove + 1);
+
+    setCurrentPlayer(currentPlayer === "X" ? "0" : "X");
   };
 
   useEffect(() => {
@@ -32,10 +34,8 @@ const Board = () => {
     } 
     else if (board.every((square) => square !== null)) {
         setIsTie(true);
-    }else {
-      setCurrentPlayer(currentPlayer === "X" ? "0" : "X");
     }
-  }, [board])
+  }, [board, currentPlayer])
 
   const calculateWinner = (squares) => {
     const lines = [
@@ -63,7 +63,7 @@ const Board = () => {
   };
 
   const handleUndo = () => {
-    if(currentMove === 0) return;
+    if(currentMove === 0 || winner) return;
     setCurrentMove(currentMove - 1);
     setBoard(moveHistory[currentMove - 1]);
   }
@@ -80,6 +80,7 @@ const Board = () => {
     setWinner(null);
     setCurrentMove(0);
     setMoveHistory(Array(9).fill(null));
+    setIsTie(false);
   };
 
   return (
@@ -94,7 +95,11 @@ const Board = () => {
         </div>
         : 
         isTie ?
-        <div> The game is Tie </div>
+        <div className='flex flex-col gap-3'> <span>The game is Tie</span>
+          <button className='border-2 border-black rounded-full p-1 hover:bg-rose-200 hover:-translate-y-1' onClick={resetGame}>
+                Reset Game
+            </button>
+             </div>
         :
         <span>
             Turn of Player: {currentPlayer}
